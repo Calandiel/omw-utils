@@ -1,8 +1,8 @@
 import struct
 from enum import Enum
-from openmw_utils import *
+from openmw_utils import sanitize_string
 from openmw_defs import *
-from openmw_format import *
+from openmw_format import ALL_RECORDS
 
 class Record:
 	def __init__(self):

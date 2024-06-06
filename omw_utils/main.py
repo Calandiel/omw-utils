@@ -1,8 +1,8 @@
 import struct
 import sys
-from openmw_record import Record
-from openmw_utils import *
 from dataclasses import dataclass
+from openmw_record import Record
+from openmw_utils import sanitize_string
 
 @dataclass
 class Field:
