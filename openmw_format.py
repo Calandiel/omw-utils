@@ -1,4 +1,5 @@
-from openmwrecorddefs import *
+from openmw_defs import RecordDefinition as RecordDefinition
+from openmw_defs import FieldDefinition, FieldDataType, FieldType
 
 ALL_RECORDS = [
 	RecordDefinition('TES3', [

@@ -1,13 +1,13 @@
 import re
 
-def remove_non_ascii(string):
+def remove_non_ascii(string: str) -> str:
 	return re.sub('[^A-Za-z0-9.,?! ]+', '', string).strip()
 
-def clear_bit(number, bit_position):
+def clear_bit(number: int, bit_position: int) -> int:
 	mask = ~(1 << bit_position)
 	return number & mask
 
-def fix_file_name(file_name):
+def fix_file_name(file_name: str) -> str:
 	if '\0' in file_name:
 		file_name = file_name.replace('\0', '')
 	if '\x00' in file_name:
@@ -17,7 +17,7 @@ def fix_file_name(file_name):
 
 	return file_name
 
-def is_nth_bit_set(number, n):
+def is_nth_bit_set(number: int, n: int) -> bool:
 	"""
 	Check if the n-th bit of a 64-bit integer is set.
 
@@ -33,6 +33,6 @@ def is_nth_bit_set(number, n):
 	# Use bitwise AND to check if the n-th bit is set
 	return (number & mask) != 0
 
-def sanitize_string(string):
-	string = string.replace(':', '\:').replace('[', '\[').replace(']', '\]').replace('\0', '')
+def sanitize_string(string: str) -> str:
+	string = string.replace(':', '\\:').replace('[', '\\[').replace(']', '\\]').replace('\0', '')
 	return string

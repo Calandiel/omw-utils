@@ -1,7 +1,7 @@
 import struct
 from enum import Enum
-from openmwutils import *
-from openmwrecords import *
+from openmw_utils import *
+from openmw_record import *
 
 FieldType = Enum('FieldType', ['COMPULSORY', 'OPTIONAL', 'REPEATABLE'])
 FieldDataType = Enum('FieldDataType', [

@@ -1,12 +1,10 @@
 import struct
 import sys
-import os
-import zlib
-from PIL import Image
-import re
-from openmwrecords import Record
-from openmwutils import *
+from openmw_record import Record
+from openmw_utils import *
+from dataclasses import dataclass
 
+@dataclass
 class Field:
 	def __init__(self):
 		self.name = 'xxxx'
@@ -15,7 +13,8 @@ class Field:
 
 	def convert_to_dict(self, parent_record):
 		if self.name == 'HEDR' and parent_record == 'TES3':
-			version = str(round(10 * struct.unpack('f', self.data[0:4])[0])) # multiplying by 10 to avoid floating point inaccuracy in str formatting
+			# multiplying by 10 to avoid floating point inaccuracy in str formatting
+			version = str(round(10 * struct.unpack('f', self.data[0:4])[0]))
 			version = version[0] + '.' + version[1:]
 			flags = struct.unpack('f', self.data[4:4+4])[0]
 			name = sanitize_string(self.data[4+4:4+4+32].decode('ascii'))
@@ -46,7 +45,7 @@ class Field:
 			di = {}
 			di['value'] = self.data[0]
 			return di
-		if self.name == 'NAME' and (parent_record == 'GLOB' or parent_record == 'TES3'):
+		if self.name == 'NAME' and parent_record in ('GLOB', 'TES3'):
 			string = sanitize_string(self.data.decode('ascii'))
 			di = {}
 			di['value'] = string
@@ -102,7 +101,7 @@ def parse_binary_file(file_path):
 		record_count = tes3_record.fields[0].convert_to_dict(tes3_record.name)['record_count']
 		final_value = tes3_record.convert_to_string()
 		i = 0
-		for f in range(record_count):
+		for _ in range(record_count):
 			i += 1
 			if i % 50 == 0:
 				print(i, '/', record_count)

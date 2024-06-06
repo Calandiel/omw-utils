@@ -1,8 +1,8 @@
 import struct
 from enum import Enum
-from openmwutils import *
-from openmwrecorddefs import *
-from openmwallrecords import *
+from openmw_utils import *
+from openmw_defs import *
+from openmw_format import *
 
 class Record:
 	def __init__(self):
